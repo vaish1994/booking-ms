@@ -6,5 +6,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class train {
     @GetMapping("/train")
-    public String getData() {return "your seat is confirmed" ; }
+    public String getData() {return "your seat is about to confirmed" ; }
 }
