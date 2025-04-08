@@ -26,5 +26,11 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
+
+        stage('version check') {
+            steps {
+                sh 'git --version; java --version; /opt/apache-maven-3.9.9/bin/mvn --version'
+            }
+        }
     }
 }
