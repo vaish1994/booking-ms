@@ -1,0 +1,36 @@
+pipeline {
+    agent {label 'teamA_slave'}
+
+  options {
+        buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
+   }
+
+  tools {
+         maven 'mvn_3.9.9'
+   }
+    stages {
+        stage('Code Compilation') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+
+        stage('Junit exceution') {
+            steps {
+                sh 'mvn clean test'
+            }
+        }
+
+        stage('Code Package') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('version check') {
+            steps {
+                sh 'git --version; java --version; /opt/apache-maven-3.9.9/bin/mvn --version'
+            }
+        }
+    }
+}
